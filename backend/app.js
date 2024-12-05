@@ -24,7 +24,14 @@ app.use(
     credentials: true,
   })
 );
-mongoose.connect("mongodb+srv://Rajkumar:Rajkumar@123@cluster0.pp199.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+// MongoDB connection with error handling
+mongoose
+  .connect(
+    "mongodb+srv://Rajkumar:Rajkumar%40123@cluster0.pp199.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+    { useNewUrlParser: true, useUnifiedTopology: true }
+  )
+  .then(() => console.log("Connected to MongoDB successfully!"))
+  .catch((err) => console.error("Error connecting to MongoDB:", err));
 
 app.use("/api/v1", products);
 app.use("/api/v1", orders);
